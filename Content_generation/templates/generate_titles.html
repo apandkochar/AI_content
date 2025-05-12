@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title Generator</title>
+    <link rel="stylesheet" href="/static/title_generation.css" />
+</head>
+<body>
+    <div class="container">
+        <h2>1. Topic & Title Generation</h2>
+        
+        <!-- Dropdown for previously generated titles -->
+        {% if all_titles and all_titles|length > 0 %}
+            <div style="margin-bottom: 20px;">
+                <label for="prevTitles"><strong>Previously Generated Titles:</strong></label>
+                <select id="prevTitles" style="width: 100%; padding: 10px; margin-top: 5px;">
+                    {% for batch in all_titles %}
+                        {% for title in batch %}
+                            <option>{{ title }}</option>
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+            </div>
+        {% endif %}
+
+        <form method="post" action="/generate">
+            <input 
+                type="text" 
+                name="topic" 
+                placeholder="Enter your technical topic" 
+                value="{{ topic }}" 
+                required
+            />
+            <button type="submit">Generate Titles</button>
+        </form>
+
+        {% if generated %}
+            <div class="success-box">
+                Generated {{ titles|length }} titles!
+            </div>
+
+            <h3>Select Your Title</h3>
+            <form method="post" action="/confirm-title">
+                {% for t in titles %}
+                    <div class="radio-option">
+                        <input type="radio" id="title{{ loop.index }}" name="selected_title" value="{{ t }}" required />
+                        <label for="title{{ loop.index }}">{{ t }}</label>
+                    </div>
+                {% endfor %}
+
+                <p>Or type your own title:</p>
+                <input 
+                    type="text" 
+                    name="custom_title" 
+                    placeholder="Custom title (optional)" 
+                    style="width: 100%; margin-bottom: 10px;"
+                />
+
+                <!-- Pass hidden fields with JSON and use safe filter -->
+                <input type="hidden" name="topic" value="{{ topic }}">
+                <input type="hidden" name="all_titles" value="{{ all_titles | tojson | safe }}">
+                
+                <button type="submit" class="confirm-btn">Confirm Title</button>
+            </form>
+
+            <form method="post" action="/generate-new" style="margin-top: 10px;">
+                <input type="hidden" name="topic" value="{{ topic }}">
+                {% if all_titles %}
+                    <input type="hidden" name="all_titles" value='{{ all_titles | tojson | safe }}'>
+                {% else %}
+                    <input type="hidden" name="all_titles" value='[]'>
+                {% endif %}
+                <button type="submit" class="secondary-btn">Generate New Variations</button>
+            </form>
+            <form action="/search-ui" method="post">
+                <input type="hidden" name="topic" value="{{ confirmed_title }}">
+                <button type="submit" class="btn btn-primary">Search the Internet</button>
+              </form>
+                          
+        {% endif %}
+    </div>
+</body>
+</html>

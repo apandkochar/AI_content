@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Search Results for "{{ topic }}"</h2>
+    <h4>Title: {{ title }}</h4>
+    
+    {% if error %}
+    <div class="alert alert-warning">
+        <p>Note: Using fallback search due to an error: {{ error }}</p>
+    </div>
+    {% endif %}
+    
+    {% if results %}
+        <div class="row">
+            <div class="col-md-12">
+                <form action="/summarize-ui" method="post">
+                    <input type="hidden" name="topic" value="{{ topic }}">
+                    <input type="hidden" name="title" value="{{ title }}">
+                    
+                    <div class="list-group mb-3">
+                        {% for result in results %}
+                        <div class="list-group-item">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="selected_links" value="{{ result.url }}" id="link{{ loop.index }}">
+                                <label class="form-check-label" for="link{{ loop.index }}">
+                                    <h5 class="mb-1">{{ result.title }}</h5>
+                                    <p class="mb-1">{{ result.snippet }}</p>
+                                    <small class="text-muted">
+                                        <a href="{{ result.url }}" target="_blank" class="text-primary">View Source</a>
+                                    </small>
+                                </label>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="custom_urls">Additional URLs (one per line):</label>
+                        <textarea class="form-control" id="custom_urls" name="custom_urls" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="custom_research">Additional Research Notes:</label>
+                        <textarea class="form-control" id="custom_research" name="custom_research" rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Continue to Summarize</button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <p>No results found for your search. Please try a different topic or search term.</p>
+        </div>
+    {% endif %}
+    
+    <div class="mt-3">
+        <a href="/search-ui?topic={{ topic|urlencode }}&title={{ title|urlencode }}" class="btn btn-secondary">Back to Search</a>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,134 @@
+/* General Page Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: #1e1e1e;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Headings */
+h2 {
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+h3 {
+    margin-top: 30px;
+    color: #80cbc4;
+}
+
+h4 {
+    margin-top: 25px;
+    color: #a0d9d1;
+}
+
+/* Labels and Inputs */
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    margin-top: 15px;
+    color: #dcdcdc;
+}
+
+textarea,
+input[type="text"],
+input[type="url"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Button Styling */
+button {
+    padding: 10px 18px;
+    background-color: #03dac6;
+    border: none;
+    border-radius: 6px;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #00bfa5;
+}
+
+/* Search Results List */
+.search-results {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 20px;
+}
+
+.search-results li {
+    background-color: #2a2a2a;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #333;
+}
+
+.search-results a {
+    color: #80cbc4;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.search-results a:hover {
+    text-decoration: underline;
+}
+
+/* Summary Box */
+.summary-box {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    border: 1px solid #333;
+}
+
+/* Error Message Styling */
+.error-box {
+    background-color: #ff4c4c;
+    color: white;
+    padding: 10px 15px;
+    margin-top: 20px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* Back Link */
+a {
+    color: #80cbc4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generate Content</title>
+    <link rel="stylesheet" href="/static/layout_styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>🎨 4. Generate Content</h2>
+        
+        <form action="/generate_content" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="topic" value="{{ topic }}">
+            <input type="hidden" name="title" value="{{ title }}">
+            <input type="hidden" name="summary" value="{{ summary }}">
+            <input type="hidden" name="layout" value="{{ layout }}">
+            <input type="hidden" name="content_type" value="{{ content_type }}">
+            
+            <div class="form-group">
+                <label for="tone"><strong>Select Content Tone:</strong></label>
+                <select name="tone" id="tone" required>
+                    <option value="Professional">Professional</option>
+                    <option value="Conversational">Conversational</option>
+                    <option value="Technical">Technical</option>
+                    <option value="Friendly">Friendly</option>
+                    <option value="Formal">Formal</option>
+                </select>
+            </div>
+
+            <button type="submit" class="primary-button">🚀 Generate Content</button>
+        </form>
+
+        <div class="back-link">
+            <a href="/layout-ui">← Back to Layout Selection</a>
+        </div>
+    </div>
+</body>
+</html>

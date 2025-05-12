@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Internet Search & Summarization</title>
+    <link rel="stylesheet" href="/static/search_and_summarize.css" />
+</head>
+<body>
+    <div class="container">
+        <h2>🔍 2. Internet Search & Summarization</h2>
+
+        <!-- Display Topic and Title -->
+        <p><strong>Topic (for search):</strong> {{ topic }}</p>
+        <p><strong>Final Title:</strong> {{ title }}</p>
+
+        <!-- Search Form -->
+        <form method="post" action="/search-ui">
+            <input type="hidden" name="title" value="{{ title }}">
+            <input type="text" name="topic" value="{{ topic }}" required />
+            <label for="num_results">Number of Results:</label>
+            <input type="number" name="num_results" value="5" min="1" max="10" />
+            <button type="submit">Search Online</button>
+        </form>
+
+        <!-- Display Search Results if available -->
+        {% if search_results %}
+            <h3>🔗 Search Results</h3>
+        {% endif %}
+
+        <!-- Summarization Form -->
+        <form method="post" action="/summarize-ui">
+            <input type="hidden" name="title" value="{{ title }}">
+            <input type="hidden" name="topic" value="{{ topic }}">
+
+            {% if search_results %}
+                <ul class="search-results">
+                    {% for result in search_results %}
+                        <li>
+                            <input type="checkbox" name="selected_links" value="{{ result.href }}" id="result{{ loop.index }}">
+                            <label for="result{{ loop.index }}">
+                                <strong>{{ result.title }}</strong><br/>
+                                <a href="{{ result.href }}" target="_blank">{{ result.href }}</a><br/>
+                                <small>Quality Score: {{ result.quality_score }}, Similarity: {{ result.similarity_score }}</small>
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <!-- Custom URL Input -->
+            <h4>📥 Add Custom URLs (comma-separated)</h4>
+            <textarea name="custom_urls" placeholder="Paste one or more URLs here, separated by commas..." style="width:100%; height:80px; background-color: #1e1e1e; color: white; border: 1px solid #333; border-radius: 6px; padding: 10px;"></textarea>
+
+            <!-- Custom Research Text -->
+            <h4>📝 Add Your Own Research Text</h4>
+            <textarea name="custom_research" placeholder="Paste your notes or research here..." style="width:100%; height:150px; background-color: #1e1e1e; color: white; border: 1px solid #333; border-radius: 6px; padding: 10px;"></textarea>
+
+            <button type="submit">🧠 Summarize</button>
+        </form>
+
+        <!-- Display Error if Exists -->
+        {% if error %}
+            <div class="error-box">{{ error }}</div>
+        {% endif %}
+
+        <!-- Display the Summarized Content if available -->
+        {% if summary %}
+            <h3>📄 Summarized Content</h3>
+            <div class="summary-box">
+                <pre style="white-space: pre-wrap;">{{ summary }}</pre>
+            </div>
+        {% endif %}
+
+        <!-- Link to go back or restart process -->
+        <div style="margin-top: 20px;">
+            <a href="/">&#8592; Back to Title Generation</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+/* General Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    background-color: #1e1e1e;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Headings */
+h2 {
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+h3 {
+    margin-top: 30px;
+    color: #80cbc4;
+}
+
+/* Input Styling */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    background-color: #2a2a2a;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Button Styling */
+button {
+    padding: 10px 18px;
+    background-color: #03dac6;
+    border: none;
+    border-radius: 6px;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #00bfa5;
+}
+
+/* Secondary Button */
+.secondary-btn {
+    background-color: #2c2c2c;
+    color: #ccc;
+    border: 1px solid #555;
+    margin-top: 10px;
+}
+
+.secondary-btn:hover {
+    background-color: #444;
+    color: white;
+}
+
+/* Radio Buttons for Titles */
+.radio-option {
+    margin-top: 10px;
+    background-color: #2a2a2a;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #333;
+}
+
+.radio-option input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Success Box */
+.success-box {
+    background-color: #2e7d32;
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-weight: bold;
+    border: 1px solid #1b5e20;
+}
+
+/* Back Links */
+a {
+    color: #80cbc4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

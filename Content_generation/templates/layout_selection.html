@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>📐 3. Layout Selection</title>
+    <link rel="stylesheet" href="/static/layout_styles.css" />
+</head>
+<body>
+    <div class="container">
+        <h2>📐 3. Layout Selection</h2>
+
+        <form method="post" action="/layout-ui">
+            <!-- Hidden fields for title, topic, and summary -->
+            <input type="hidden" name="topic" value="{{ topic }}">
+            <input type="hidden" name="title" value="{{ title }}">
+            <input type="hidden" name="summary" value="{{ summary }}">
+            <input type="hidden" name="search_context" value="{{ summary }}">
+
+            <!-- Content Type Dropdown -->
+            <label for="content_type"><strong>📂 Select Content Type:</strong></label>
+            <select name="content_type" id="content_type" required>
+                <option value="blog">Blog</option>
+                <option value="use_case">Use Case</option>
+                <option value="case_study">Case Study</option>
+            </select>
+
+            <!-- Layout Generator Radio Buttons -->
+            <label><strong>⚙️ Choose Layout Generator:</strong></label>
+            <div class="radio-group">
+                <label><input type="radio" id="default" name="layout_generator" value="Generate Layout" checked> Generate Layout</label>
+                <label><input type="radio" id="custom" name="layout_generator" value="Custom layout"> Custom Layout</label>
+                <label><input type="radio" id="url" name="layout_generator" value="URL layout"> URL Layout</label>
+            </div>
+
+            <!-- Custom Layout Input -->
+            <div id="custom_input" class="hidden">
+                <label for="content_type"><strong>📋 Add Additional Instructions:</strong></label>
+                <textarea name="custom_instructions" placeholder="Enter your layout instructions here..."></textarea>
+            </div>
+
+            <!-- URL Layout Input -->
+            <div id="url_input" class="hidden">
+                <label for="url"><strong>🔗 Enter URL:</strong></label>
+                <input type="url" name="url" placeholder="https://example.com" />
+            </div>
+
+            <button type="submit">🛠️ Generate Layout</button>
+        </form>
+
+        <!-- Display generated layout -->
+        {% if layout %}
+            <h3>📋 Generated Layout</h3>
+            <pre class="layout-box">{{ layout }}</pre>
+        {% endif %}
+
+        {% if confirmed %}
+            <p class="confirmation"><strong>✅ Layout confirmed and saved!</strong></p>
+        {% endif %}
+        <!-- Replace the confirm layout form section with this -->
+        {% if layout %}
+        <form action="/confirm_layout" method="post">
+            <input type="hidden" name="topic" value="{{ topic }}">
+            <input type="hidden" name="title" value="{{ title }}">
+            <input type="hidden" name="summary" value="{{ summary }}">
+            <input type="hidden" name="layout" value='{{ layout | tojson | safe }}'>
+            <input type="hidden" name="confirmed" value="true">
+            <input type="hidden" name="content_type" value="{{ content_type.lower().replace(' ', '_') }}">
+            <button type="submit">✅ Confirm Layout</button>
+        </form>
+        {% endif %}
+
+        <div class="back-link">
+            <a href="/search-ui">&#8592; Back to Research</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleLayoutInputs() {
+            const layoutType = document.querySelector('input[name="layout_generator"]:checked').value;
+            document.getElementById("custom_input").style.display = layoutType === "Custom layout" ? "block" : "none";
+            document.getElementById("url_input").style.display = layoutType === "URL layout" ? "block" : "none";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const radios = document.querySelectorAll('input[name="layout_generator"]');
+            radios.forEach(radio => radio.addEventListener("change", toggleLayoutInputs));
+            toggleLayoutInputs();  // initialize based on current state
+        });
+    </script>
+</body>
+</html>

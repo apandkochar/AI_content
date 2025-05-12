@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-dotenv
+requests
+beautifulsoup4
+numpy
+openai==0.28
+google-api-python-client
+httpx
+pydantic
+jinja2
+python-multipart
+

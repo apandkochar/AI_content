@@ -1,0 +1,51 @@
+/* static/styles.css */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #121212;
+    color: #ffffff;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #1e1e1e;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+}
+
+h1, h2 {
+    color: #00ffff;
+}
+
+form div {
+    margin-bottom: 1rem;
+}
+
+textarea, select, input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #2b2b2b;
+    color: white;
+}
+
+button {
+    padding: 0.7rem 1.5rem;
+    background-color: #00ffff;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.content-box {
+    background-color: #2a2a2a;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
